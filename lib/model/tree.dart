@@ -1,30 +1,29 @@
 import 'package:json_annotation/json_annotation.dart';
 
 part 'tree.g.dart';
+
 @JsonSerializable()
 class Tree {
-    String? status;
-    int? treeId;
-    String? filename;
-    String? species;
-    String? disease;
-    String? imageUrl;
-    String? message;
+  String? status;
 
-    Tree({
-        this.status,
-        @JsonKey(name: 'tree_id')
-        this.treeId,
-        @JsonKey(name: 'file_name')
-        this.filename,
-        this.species,
-        this.disease,
-        @JsonKey(name: 'image_url')
-        this.imageUrl,
-        this.message,
-    });
-      factory Tree.fromJson(Map<String, dynamic> json) =>
-      _$TreeFromJson(json);
+  @JsonKey(name: 'tree_id')
+  int? treeId;
+  String? species;
+  String? disease;
+  String? result;
 
+  @JsonKey(name: 'image_url')
+  String? imageUrl;
+
+  Tree({
+    this.status,
+    this.treeId,
+    this.species,
+    this.disease,
+    this.result,
+    this.imageUrl,
+  });
+
+  factory Tree.fromJson(Map<String, dynamic> json) => _$TreeFromJson(json);
   Map<String, dynamic> toJson() => _$TreeToJson(this);
 }
