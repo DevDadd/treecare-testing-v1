@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:testtree/cubit/file_cubit.dart';
 import 'package:testtree/cubit/file_state.dart';
 import 'package:testtree/cubit/tree_cubit.dart';
@@ -17,6 +19,19 @@ class _UploadPageState extends State<UploadPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF5C7B70),
+        leading: Icon(Icons.menu, color: Colors.white),
+        centerTitle: true,
+        title: Text(
+          "Upload and Analyzes",
+          style: GoogleFonts.cairo(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      backgroundColor: Color(0xFFC7D7CE),
       body: BlocBuilder<TreeCubit, TreeState>(
         builder: (context, treeState) {
           return BlocBuilder<FileCubit, FileState>(

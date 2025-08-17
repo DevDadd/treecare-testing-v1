@@ -40,7 +40,12 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
               const SizedBox(height: 40),
 
               /// Logo
-              const Center(), // TODO: Replace with logo widget
+              Center(
+                child: Image.asset(
+                  'assets/background.png', // thay bằng đường dẫn logo trong assets của bạn
+                  height: 200,
+                ),
+              ),
 
               const SizedBox(height: 30),
 
@@ -52,6 +57,7 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
                   style: GoogleFonts.cairo(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
+                    color: Colors.green,
                   ),
                 ),
               ),
@@ -110,7 +116,12 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
                   const Expanded(child: Divider(thickness: 1)),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text("Or sign in with", style: GoogleFonts.cairo()),
+                    child: Text(
+                      "Or sign in with",
+                      style: GoogleFonts.cairo(
+                        color: const Color.fromARGB(255, 58, 143, 61),
+                      ),
+                    ),
                   ),
                   const Expanded(child: Divider(thickness: 1)),
                 ],
@@ -162,7 +173,12 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don’t have an account? ", style: GoogleFonts.cairo()),
+                  Text(
+                    "Don’t have an account? ",
+                    style: GoogleFonts.cairo(
+                      color: const Color.fromARGB(255, 59, 141, 62),
+                    ),
+                  ),
                   GestureDetector(
                     onTap: () {},
                     child: Text(
