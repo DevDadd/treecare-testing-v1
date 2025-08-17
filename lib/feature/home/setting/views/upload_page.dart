@@ -6,14 +6,14 @@ import 'package:testtree/cubit/file_state.dart';
 import 'package:testtree/cubit/tree_cubit.dart';
 import 'package:testtree/cubit/tree_state.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class UploadPage extends StatefulWidget {
+  const UploadPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<UploadPage> createState() => _UploadPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _UploadPageState extends State<UploadPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

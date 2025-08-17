@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1053115997474",
+    "project_id": "treecare-c1fde",
+    "storage_bucket": "treecare-c1fde.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053115997474:android:d3d42cc20fde0a5af1d97b",
+        "android_client_info": {
+          "package_name": "com.example.testtree"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053115997474-ask34srdoai8r6kdg81lsuag6dv0gf9n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_bkPydxbOQpgDJ2sBZMI_7flKCegaPxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053115997474-ask34srdoai8r6kdg81lsuag6dv0gf9n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1053115997474-hcglrqp94ush22b1bgd4lprjca6535r2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.testtree"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
