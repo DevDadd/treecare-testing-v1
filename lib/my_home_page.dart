@@ -1,6 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:testtree/feature/home/setting/views/home_page.dart';
 import 'package:testtree/feature/home/setting/views/upload_page_provider.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -14,15 +15,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _bottomNavIndex = 0;
 
-  final iconList = <IconData>[
-    FontAwesomeIcons.file,
-    FontAwesomeIcons.solidUser,
-  ];
+  final iconList = <IconData>[FontAwesomeIcons.file, FontAwesomeIcons.house];
 
-  final List<Widget> pages = [
-    const UploadPageProvider(),
-    const Center(child: Text("Profile Page")),
-  ];
+  final List<Widget> pages = [const UploadPageProvider(), const HomePage()];
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +31,8 @@ class _MyHomePageState extends State<MyHomePage> {
         gapLocation: GapLocation.center,
         notchSmoothness: NotchSmoothness.defaultEdge,
         onTap: (index) => setState(() => _bottomNavIndex = index),
-        inactiveColor: Color(0xFF5C7B70),
-        activeColor: Color(0xFF5C7B70),
+        inactiveColor: Colors.grey,
+        activeColor: Colors.green,
       ),
     );
   }

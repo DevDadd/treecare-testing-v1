@@ -139,7 +139,6 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
                       try {
                         final GoogleSignInAccount? user = await googleSignIn
                             .signIn();
-                        googleSignIn.signOut();
                         if (user != null) {
                           if (mounted) {
                             context.push(AppRouteConstant.myHomePage);
