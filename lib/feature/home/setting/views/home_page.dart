@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:testtree/router/go_router.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -46,7 +48,9 @@ class HomePage extends StatelessWidget {
               bgColor: Colors.red.shade50,
               title: "Identify Disease",
               subtitle: "Diagnose tree health issues",
-              onTap: () {},
+              onTap: () {
+                context.push(AppRouteConstant.myHomePage);
+              },
             ),
             _optionCard(
               icon: Icons.nature,
