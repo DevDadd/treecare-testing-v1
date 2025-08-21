@@ -16,20 +16,19 @@ class UploadPage extends StatefulWidget {
 }
 
 class _UploadPageState extends State<UploadPage> {
-  // Helper to format file size
+  // Format file size
   String formatBytes(int bytes, int decimals) {
     if (bytes <= 0) return "0 B";
     const suffixes = ["B", "KB", "MB", "GB", "TB"];
     var i = (log(bytes) / log(1024)).floor();
-    return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) +
-        ' ' +
-        suffixes[i];
+    double size = bytes / pow(1024, i);
+    return "${size.toStringAsFixed(size < 10 ? decimals : 0)} ${suffixes[i]}";
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF9F9F9),
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -47,7 +46,7 @@ class _UploadPageState extends State<UploadPage> {
             color: Colors.white,
           ),
         ),
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 16.0),
@@ -169,8 +168,8 @@ class _UploadPageState extends State<UploadPage> {
 
                     const SizedBox(height: 20),
 
-                    // Show selected file info
-                    if (fileState.file != null)
+                    // Show selected file info + preview
+                    if (pickedFile != null) ...[
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
@@ -198,7 +197,7 @@ class _UploadPageState extends State<UploadPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    fileState.file!.name,
+                                    pickedFile.name,
                                     style: GoogleFonts.cairo(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600,
@@ -207,7 +206,7 @@ class _UploadPageState extends State<UploadPage> {
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
-                                    formatBytes(fileState.file!.size, 2),
+                                    formatBytes(pickedFile.size, 2),
                                     style: GoogleFonts.cairo(
                                       fontSize: 12,
                                       color: Colors.black54,
@@ -219,6 +218,7 @@ class _UploadPageState extends State<UploadPage> {
                           ],
                         ),
                       ),
+                    ],
 
                     const SizedBox(height: 20),
 
@@ -234,6 +234,9 @@ class _UploadPageState extends State<UploadPage> {
                                 context.read<TreeCubit>().getTree(
                                   tree!.treeId!,
                                 );
+
+                                // ✅ Save history after upload
+                                context.read<TreeCubit>().addHistory(tree);
                               }
                             }
                           : null,
@@ -269,13 +272,20 @@ class _UploadPageState extends State<UploadPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              treeState.treeResult!.species ?? "",
-                              style: GoogleFonts.cairo(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.green.shade800,
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.eco, color: Colors.green.shade700),
+                                const SizedBox(width: 8),
+                                Text(
+                                  treeState.treeResult!.species ?? "",
+                                  style: GoogleFonts.cairo(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.green.shade800,
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 8),
                             Text(
