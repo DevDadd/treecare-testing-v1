@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:testtree/cubit/tree_cubit.dart';
+import 'package:testtree/di.dart';
 import 'package:testtree/feature/home/setting/views/google_login_page.dart';
+import 'package:testtree/feature/home/setting/views/history_page.dart';
 import 'package:testtree/my_home_page.dart';
 
 class AppRouteConstant {
@@ -10,6 +14,7 @@ class AppRouteConstant {
   static const String initial = '/';
   static const String googleLoginPage = '/google-login-page';
   static const String myHomePage = '/my-home-page';
+  static const String historypage = '/history-page';
 
   // Nested Key
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -41,6 +46,14 @@ class AppRoutes {
           return MyHomePage();
         },
       ),
+      GoRoute(
+        path: AppRouteConstant.historypage,
+        builder: (BuildContext context, GoRouterState state) {
+          final TreeCubit treeCubit = getIt.get();
+          return BlocProvider.value(value: treeCubit, child: HistoryPage());
+        },
+      ),
+
     ],
   );
 }

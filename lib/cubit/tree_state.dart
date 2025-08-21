@@ -8,8 +8,9 @@ part 'tree_state.g.dart';
 @CopyWith()
 @JsonSerializable()
 class TreeState extends Equatable {
-  const TreeState({this.treeResult});
+  const TreeState({this.treeResult, this.treeHistory = const []});
   final Tree? treeResult;
+  final List<Tree> treeHistory;
   @override
-  List<Object?> get props => [treeResult];
+  List<Object?> get props => [treeResult,treeHistory];
 }

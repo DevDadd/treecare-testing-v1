@@ -1,12 +1,13 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 import 'package:testtree/model/tree.dart';
 import 'package:testtree/service/tree_service.dart';
 import 'tree_state.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-class TreeCubit extends Cubit<TreeState> {
+
+class TreeCubit extends HydratedCubit<TreeState> {
   TreeCubit() : super(TreeState());
   final logger = Logger();
 
@@ -49,5 +50,20 @@ class TreeCubit extends Cubit<TreeState> {
     } catch (e, st) {
       logger.e('Unexpected error getting tree', error: e, stackTrace: st);
     }
+  }
+  void addHistory(Tree tree){
+    emit(state.copyWith(treeHistory: [...state.treeHistory,tree]));
+  }
+  
+  @override
+  TreeState? fromJson(Map<String, dynamic> json) {
+    // TODO: implement fromJson
+    throw UnimplementedError();
+  }
+  
+  @override
+  Map<String, dynamic>? toJson(TreeState state) {
+    // TODO: implement toJson
+    throw UnimplementedError();
   }
 }

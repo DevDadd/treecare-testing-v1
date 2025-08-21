@@ -1,16 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testtree/cubit/file_cubit.dart';
-import 'package:testtree/cubit/tree_cubit.dart'; // example 2nd cubit
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:testtree/di.dart';
-import 'package:testtree/feature/home/setting/views/google_login_page.dart';
-import 'package:testtree/feature/home/setting/views/upload_page.dart';
 import 'package:testtree/firebase_options.dart';
 import 'package:testtree/router/go_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+    HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory:
+        kIsWeb
+            ? HydratedStorageDirectory.web
+            : HydratedStorageDirectory((await getTemporaryDirectory()).path),
+  );
   setup();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());

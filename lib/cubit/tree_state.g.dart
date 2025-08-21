@@ -9,6 +9,8 @@ part of 'tree_state.dart';
 abstract class _$TreeStateCWProxy {
   TreeState treeResult(Tree? treeResult);
 
+  TreeState treeHistory(List<Tree> treeHistory);
+
   /// Creates a new instance with the provided field values.
   /// Passing `null` to a nullable field nullifies it, while `null` for a non-nullable field is ignored. To update a single field use `TreeState(...).copyWith.fieldName(value)`.
   ///
@@ -16,7 +18,7 @@ abstract class _$TreeStateCWProxy {
   /// ```dart
   /// TreeState(...).copyWith(id: 12, name: "My name")
   /// ```
-  TreeState call({Tree? treeResult});
+  TreeState call({Tree? treeResult, List<Tree> treeHistory});
 }
 
 /// Callable proxy for `copyWith` functionality.
@@ -30,6 +32,10 @@ class _$TreeStateCWProxyImpl implements _$TreeStateCWProxy {
   TreeState treeResult(Tree? treeResult) => call(treeResult: treeResult);
 
   @override
+  TreeState treeHistory(List<Tree> treeHistory) =>
+      call(treeHistory: treeHistory);
+
+  @override
   /// Creates a new instance with the provided field values.
   /// Passing `null` to a nullable field nullifies it, while `null` for a non-nullable field is ignored. To update a single field use `TreeState(...).copyWith.fieldName(value)`.
   ///
@@ -37,12 +43,20 @@ class _$TreeStateCWProxyImpl implements _$TreeStateCWProxy {
   /// ```dart
   /// TreeState(...).copyWith(id: 12, name: "My name")
   /// ```
-  TreeState call({Object? treeResult = const $CopyWithPlaceholder()}) {
+  TreeState call({
+    Object? treeResult = const $CopyWithPlaceholder(),
+    Object? treeHistory = const $CopyWithPlaceholder(),
+  }) {
     return TreeState(
       treeResult: treeResult == const $CopyWithPlaceholder()
           ? _value.treeResult
           // ignore: cast_nullable_to_non_nullable
           : treeResult as Tree?,
+      treeHistory:
+          treeHistory == const $CopyWithPlaceholder() || treeHistory == null
+          ? _value.treeHistory
+          // ignore: cast_nullable_to_non_nullable
+          : treeHistory as List<Tree>,
     );
   }
 }
@@ -62,8 +76,14 @@ TreeState _$TreeStateFromJson(Map<String, dynamic> json) => TreeState(
   treeResult: json['treeResult'] == null
       ? null
       : Tree.fromJson(json['treeResult'] as Map<String, dynamic>),
+  treeHistory:
+      (json['treeHistory'] as List<dynamic>?)
+          ?.map((e) => Tree.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
 );
 
 Map<String, dynamic> _$TreeStateToJson(TreeState instance) => <String, dynamic>{
   'treeResult': instance.treeResult,
+  'treeHistory': instance.treeHistory,
 };

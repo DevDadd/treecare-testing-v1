@@ -58,7 +58,9 @@ class HomePage extends StatelessWidget {
               bgColor: Colors.green.shade50,
               title: "My Trees",
               subtitle: "Track your tree collection",
-              onTap: () {},
+              onTap: () {
+                context.go(AppRouteConstant.historypage);
+              },
             ),
             _optionCard(
               icon: Icons.lightbulb_outline,
