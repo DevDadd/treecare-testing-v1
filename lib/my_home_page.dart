@@ -13,7 +13,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _bottomNavIndex = 0;
+  int _bottomNavIndex = 1;
 
   final iconList = <IconData>[FontAwesomeIcons.file, FontAwesomeIcons.house];
 
