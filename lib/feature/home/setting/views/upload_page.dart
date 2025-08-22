@@ -25,8 +25,22 @@ class _UploadPageState extends State<UploadPage> {
         ' ' +
         suffixes[i];
   }
-
   @override
+ late TreeCubit treeCubit;
+
+@override
+void didChangeDependencies() {
+  super.didChangeDependencies();
+  // lưu tham chiếu ở đây
+  treeCubit = context.read<TreeCubit>();
+}
+
+@override
+void dispose() {
+  // gọi hàm clear UI state
+  treeCubit.clearResult();
+  super.dispose();
+}
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF9F9F9),
