@@ -234,6 +234,7 @@ class _UploadPageState extends State<UploadPage> {
                                 context.read<TreeCubit>().getTree(
                                   tree!.treeId!,
                                 );
+                                context.read<TreeCubit>().addHistory(tree);
                               }
                             }
                           : null,

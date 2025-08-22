@@ -84,6 +84,6 @@ TreeState _$TreeStateFromJson(Map<String, dynamic> json) => TreeState(
 );
 
 Map<String, dynamic> _$TreeStateToJson(TreeState instance) => <String, dynamic>{
-  'treeResult': instance.treeResult,
-  'treeHistory': instance.treeHistory,
+  'treeResult': instance.treeResult?.toJson(),
+  'treeHistory': instance.treeHistory.map((e) => e.toJson()).toList(),
 };

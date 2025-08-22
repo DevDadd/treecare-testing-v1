@@ -6,7 +6,6 @@ import 'package:testtree/service/tree_service.dart';
 import 'tree_state.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-
 class TreeCubit extends HydratedCubit<TreeState> {
   TreeCubit() : super(TreeState());
   final logger = Logger();
@@ -51,19 +50,28 @@ class TreeCubit extends HydratedCubit<TreeState> {
       logger.e('Unexpected error getting tree', error: e, stackTrace: st);
     }
   }
-  void addHistory(Tree tree){
-    emit(state.copyWith(treeHistory: [...state.treeHistory,tree]));
+
+  void addHistory(Tree tree) {
+    emit(state.copyWith(treeHistory: [...state.treeHistory, tree]));
   }
-  
+
   @override
   TreeState? fromJson(Map<String, dynamic> json) {
-    // TODO: implement fromJson
-    throw UnimplementedError();
+    try {
+      return TreeState.fromJson(json);
+    } catch (e) {
+      logger.e('Error decoding state from JSON', error: e);
+      return null;
+    }
   }
-  
+
   @override
   Map<String, dynamic>? toJson(TreeState state) {
-    // TODO: implement toJson
-    throw UnimplementedError();
+    try {
+      return state.toJson();
+    } catch (e) {
+      logger.e('Error encoding state to JSON', error: e);
+      return null;
+    }
   }
 }
