@@ -1,8 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:testtree/feature/home/setting/views/history_page.dart';
-import 'package:testtree/feature/home/setting/views/history_page_provider.dart';
 import 'package:testtree/feature/home/setting/views/home_page.dart';
 import 'package:testtree/feature/home/setting/views/upload_page_provider.dart';
 
@@ -17,9 +15,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _bottomNavIndex = 0;
 
-  final iconList = <IconData>[FontAwesomeIcons.file, FontAwesomeIcons.house, FontAwesomeIcons.bookBible];
+  final iconList = <IconData>[FontAwesomeIcons.file, FontAwesomeIcons.house];
 
-  final List<Widget> pages = [const UploadPageProvider(), const HomePage(), const HistoryPageProvider()];
+  final List<Widget> pages = [const UploadPageProvider(), const HomePage()];
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.white,
         icons: iconList,
         activeIndex: _bottomNavIndex,
-        gapLocation: GapLocation.end,
+        gapLocation: GapLocation.center,
         notchSmoothness: NotchSmoothness.defaultEdge,
         onTap: (index) => setState(() => _bottomNavIndex = index),
         inactiveColor: Colors.grey,

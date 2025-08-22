@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:testtree/cubit/tree_cubit.dart';
 import 'package:testtree/cubit/tree_state.dart';
 
@@ -9,49 +11,71 @@ class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("History"), centerTitle: true),
+      backgroundColor: Color.fromARGB(255, 238, 233, 233),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(
+          "Your leaves collections",
+          style: GoogleFonts.cairo(
+            fontWeight: FontWeight.w700,
+            color: Colors.green,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Icon(FontAwesomeIcons.treeCity, color: Colors.green),
+          ),
+        ],
+      ),
       body: BlocBuilder<TreeCubit, TreeState>(
         builder: (context, state) {
           if (state.treeHistory.isEmpty) {
             return const Center(child: Text("No history yet"));
           }
 
-          return ListView.builder(
-            itemCount: state.treeHistory.length,
-            itemBuilder: (context, index) {
-              final item = state.treeHistory[index];
-              print(item.imageUrl);
-              return Card(
-                margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                child: ListTile(
-                  leading: item.imageUrl != null && item.imageUrl!.isNotEmpty
-                      ? Image.network(
-                          item.imageUrl!,
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.cover,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return const SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: Center(
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ),
-                              ),
-                            );
-                          },
-                          errorBuilder: (context, error, stackTrace) {
-                            return const Icon(Icons.broken_image, size: 50);
-                          },
-                        )
-                      : const Icon(Icons.image, size: 50),
-                  title: Text(item.species ?? "Unknown species"),
-                  subtitle: Text(item.disease ?? "Unknown disease"),
-                ),
-              );
-            },
+          return Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: ListView.builder(
+              itemCount: state.treeHistory.length,
+              itemBuilder: (context, index) {
+                final item = state.treeHistory[index];
+                return Card(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(
+                      color: Colors.green, // Green border
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ListTile(
+                    leading: const Icon(
+                      FontAwesomeIcons.tree, // Tree icon
+                      size: 30,
+                      color: Colors.green,
+                    ),
+                    title: Text(
+                      item.species ?? "Unknown species",
+                      style: GoogleFonts.cairo(
+                        fontWeight: FontWeight.w600,
+                        color: const Color.fromARGB(255, 48, 116, 50),
+                      ),
+                    ),
+                    subtitle: Text(
+                      item.disease ?? "Unknown disease",
+                      style: GoogleFonts.cairo(
+                        fontWeight: FontWeight.w600,
+                        color: const Color.fromARGB(255, 48, 163, 107),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
           );
         },
       ),
