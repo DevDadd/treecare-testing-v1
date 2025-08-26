@@ -14,7 +14,7 @@ class AppRouteConstant {
   static const String initial = '/';
   static const String googleLoginPage = '/google-login-page';
   static const String myHomePage = '/my-home-page';
-  static const String historypage = '/history-page';
+  static const String myHistoryPage = '/my-history-page';
 
   // Nested Key
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -47,13 +47,12 @@ class AppRoutes {
         },
       ),
       GoRoute(
-        path: AppRouteConstant.historypage,
+        path: AppRouteConstant.myHistoryPage,
         builder: (BuildContext context, GoRouterState state) {
           final TreeCubit treeCubit = getIt.get();
           return BlocProvider.value(value: treeCubit, child: HistoryPage());
         },
       ),
-
     ],
   );
 }

@@ -59,7 +59,7 @@ class HomePage extends StatelessWidget {
               title: "My Trees",
               subtitle: "Track your tree collection",
               onTap: () {
-                context.push(AppRouteConstant.historypage);
+                context.push(AppRouteConstant.myHistoryPage);
               },
             ),
             _optionCard(
