@@ -53,16 +53,16 @@ class HistoryPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: ListTile(
-                    leading: const Icon(
-                      FontAwesomeIcons.tree, // Tree icon
-                      size: 30,
-                      color: Colors.green,
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(item.imageUrl ?? " "),
+                      radius: 25,
                     ),
                     title: Text(
                       item.species ?? "Unknown species",
                       style: GoogleFonts.cairo(
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 48, 116, 50),
+                        fontSize: 20,
                       ),
                     ),
                     subtitle: Text(
@@ -70,6 +70,7 @@ class HistoryPage extends StatelessWidget {
                       style: GoogleFonts.cairo(
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 48, 163, 107),
+                        fontSize: 15,
                       ),
                     ),
                   ),

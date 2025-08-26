@@ -1,4 +1,4 @@
 class Contains {
   Contains(_);
-  static const String baseUrl = "https://ceb90c47f23f.ngrok-free.app";
+  static const String baseUrl = "http://10.0.2.2:8000/";
 }
