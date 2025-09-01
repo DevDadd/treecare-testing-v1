@@ -25,22 +25,24 @@ class _UploadPageState extends State<UploadPage> {
         ' ' +
         suffixes[i];
   }
+
   @override
- late TreeCubit treeCubit;
+  late TreeCubit treeCubit;
 
-@override
-void didChangeDependencies() {
-  super.didChangeDependencies();
-  // lưu tham chiếu ở đây
-  treeCubit = context.read<TreeCubit>();
-}
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // lưu tham chiếu ở đây
+    treeCubit = context.read<TreeCubit>();
+  }
 
-@override
-void dispose() {
-  // gọi hàm clear UI state
-  treeCubit.clearResult();
-  super.dispose();
-}
+  @override
+  void dispose() {
+    // gọi hàm clear UI state
+    treeCubit.clearResult();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF9F9F9),
@@ -74,7 +76,6 @@ void dispose() {
           return BlocBuilder<FileCubit, FileState>(
             builder: (context, fileState) {
               final pickedFile = fileState.file;
-
               return SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -177,6 +178,39 @@ void dispose() {
                               ),
                             ),
                           ),
+                          SizedBox(height: 20),
+                          Text(
+                            "Take a Picture of Your Plant",
+                            style: GoogleFonts.cairo(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            "Take a picture of a sick plant leaf to get an accurate diagnosis.",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.cairo(
+                              fontSize: 14,
+                              color: Colors.black54,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          ElevatedButton(
+                            onPressed: () {
+                              context.read<FileCubit>().takePicture();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              foregroundColor: Colors.white,
+                            ),
+                            child: Text(
+                              "Take Picture",
+                              style: GoogleFonts.cairo(
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -236,39 +270,41 @@ void dispose() {
 
                     const SizedBox(height: 20),
 
-                    // Upload Button
-                    ElevatedButton(
-                      onPressed: pickedFile != null && pickedFile.path != null
-                          ? () async {
-                              final tree = await context
-                                  .read<TreeCubit>()
-                                  .uploadTreeImage(File(pickedFile.path!));
+                    if (fileState.file != null)
+                      ElevatedButton(
+                        onPressed: pickedFile != null
+                            ? () async {
+                                final tree = await context
+                                    .read<TreeCubit>()
+                                    .uploadTreeImage(
+                                      File(pickedFile.path ?? " "),
+                                    );
 
-                              if (tree?.treeId != null) {
-                                context.read<TreeCubit>().getTree(
-                                  tree!.treeId!,
-                                );
-                                context.read<TreeCubit>().addHistory(tree);
+                                if (tree?.treeId != null) {
+                                  context.read<TreeCubit>().getTree(
+                                    tree!.treeId!,
+                                  );
+                                  context.read<TreeCubit>().addHistory(tree);
+                                }
                               }
-                            }
-                          : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF27AE60),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF27AE60),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          disabledBackgroundColor: Colors.grey.shade300,
                         ),
-                        disabledBackgroundColor: Colors.grey.shade300,
-                      ),
-                      child: Text(
-                        "Upload Image",
-                        style: GoogleFonts.cairo(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                        child: Text(
+                          "Upload Image",
+                          style: GoogleFonts.cairo(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
 
                     const SizedBox(height: 20),
 

@@ -11,6 +11,10 @@ abstract class _$FileStateCWProxy {
 
   FileState isUploaded(bool isUploaded);
 
+  FileState captureImage(XFile? captureImage);
+
+  FileState uploadFile(XFile? uploadFile);
+
   /// Creates a new instance with the provided field values.
   /// Passing `null` to a nullable field nullifies it, while `null` for a non-nullable field is ignored. To update a single field use `FileState(...).copyWith.fieldName(value)`.
   ///
@@ -18,7 +22,12 @@ abstract class _$FileStateCWProxy {
   /// ```dart
   /// FileState(...).copyWith(id: 12, name: "My name")
   /// ```
-  FileState call({PlatformFile? file, bool isUploaded});
+  FileState call({
+    PlatformFile? file,
+    bool isUploaded,
+    XFile? captureImage,
+    XFile? uploadFile,
+  });
 }
 
 /// Callable proxy for `copyWith` functionality.
@@ -35,6 +44,13 @@ class _$FileStateCWProxyImpl implements _$FileStateCWProxy {
   FileState isUploaded(bool isUploaded) => call(isUploaded: isUploaded);
 
   @override
+  FileState captureImage(XFile? captureImage) =>
+      call(captureImage: captureImage);
+
+  @override
+  FileState uploadFile(XFile? uploadFile) => call(uploadFile: uploadFile);
+
+  @override
   /// Creates a new instance with the provided field values.
   /// Passing `null` to a nullable field nullifies it, while `null` for a non-nullable field is ignored. To update a single field use `FileState(...).copyWith.fieldName(value)`.
   ///
@@ -45,6 +61,8 @@ class _$FileStateCWProxyImpl implements _$FileStateCWProxy {
   FileState call({
     Object? file = const $CopyWithPlaceholder(),
     Object? isUploaded = const $CopyWithPlaceholder(),
+    Object? captureImage = const $CopyWithPlaceholder(),
+    Object? uploadFile = const $CopyWithPlaceholder(),
   }) {
     return FileState(
       file: file == const $CopyWithPlaceholder()
@@ -56,6 +74,14 @@ class _$FileStateCWProxyImpl implements _$FileStateCWProxy {
           ? _value.isUploaded
           // ignore: cast_nullable_to_non_nullable
           : isUploaded as bool,
+      captureImage: captureImage == const $CopyWithPlaceholder()
+          ? _value.captureImage
+          // ignore: cast_nullable_to_non_nullable
+          : captureImage as XFile?,
+      uploadFile: uploadFile == const $CopyWithPlaceholder()
+          ? _value.uploadFile
+          // ignore: cast_nullable_to_non_nullable
+          : uploadFile as XFile?,
     );
   }
 }
