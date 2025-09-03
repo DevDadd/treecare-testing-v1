@@ -16,11 +16,9 @@ class TreeState extends Equatable {
   final Tree? treeResult;
   final List<Tree> treeHistory;
 
-  /// factory constructor để deserialize
   factory TreeState.fromJson(Map<String, dynamic> json) =>
       _$TreeStateFromJson(json);
 
-  /// toJson để serialize
   Map<String, dynamic> toJson() => _$TreeStateToJson(this);
 
   @override

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:testtree/cubit/tree_cubit.dart';
 import 'package:testtree/di.dart';
 import 'package:testtree/feature/home/setting/views/google_login_page.dart';
+import 'package:testtree/feature/home/setting/views/history_detail_page.dart';
 import 'package:testtree/feature/home/setting/views/history_page.dart';
 import 'package:testtree/my_home_page.dart';
 
@@ -15,6 +16,7 @@ class AppRouteConstant {
   static const String googleLoginPage = '/google-login-page';
   static const String myHomePage = '/my-home-page';
   static const String myHistoryPage = '/my-history-page';
+  static const String historyDetailPage = '/history-detail-page';
 
   // Nested Key
   static final GlobalKey<NavigatorState> navigatorKey =
