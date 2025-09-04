@@ -55,6 +55,13 @@ class AppRoutes {
           return BlocProvider.value(value: treeCubit, child: HistoryPage());
         },
       ),
+      GoRoute(
+        path: AppRouteConstant.historyDetailPage,
+        builder: (BuildContext context, GoRouterState state) {
+          final TreeCubit treeCubit = getIt.get();
+          return BlocProvider.value(value: treeCubit, child: HistoryDetailPage(treeId: state.extra is int ? state.extra as int : 0));
+        },
+      ),
     ],
   );
 }

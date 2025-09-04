@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testtree/cubit/tree_cubit.dart';
 import 'package:testtree/cubit/tree_state.dart';
+import 'package:testtree/router/go_router.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
@@ -40,37 +42,42 @@ class HistoryPage extends StatelessWidget {
               itemCount: state.treeHistory.length,
               itemBuilder: (context, index) {
                 final item = state.treeHistory[index];
-                return Card(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(
-                      color: Colors.green, // Green border
-                      width: 1,
+                return GestureDetector(
+                  child: Card(
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
                     ),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(item.imageUrl ?? " "),
-                      radius: 25,
-                    ),
-                    title: Text(
-                      item.species ?? "Unknown species",
-                      style: GoogleFonts.cairo(
-                        fontWeight: FontWeight.w600,
-                        color: const Color.fromARGB(255, 48, 116, 50),
-                        fontSize: 20,
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(
+                        color: Colors.green, // Green border
+                        width: 1,
                       ),
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    subtitle: Text(
-                      item.disease ?? "Unknown disease",
-                      style: GoogleFonts.cairo(
-                        fontWeight: FontWeight.w600,
-                        color: const Color.fromARGB(255, 48, 163, 107),
-                        fontSize: 15,
+                    child: ListTile(
+                      onTap: () {
+                        context.push(AppRouteConstant.historyDetailPage,extra: item.treeId);
+                      },
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(item.imageUrl ?? " "),
+                        radius: 25,
+                      ),
+                      title: Text(
+                        item.species ?? "Unknown species",
+                        style: GoogleFonts.cairo(
+                          fontWeight: FontWeight.w600,
+                          color: const Color.fromARGB(255, 48, 116, 50),
+                          fontSize: 20,
+                        ),
+                      ),
+                      subtitle: Text(
+                        item.disease ?? "Unknown disease",
+                        style: GoogleFonts.cairo(
+                          fontWeight: FontWeight.w600,
+                          color: const Color.fromARGB(255, 48, 163, 107),
+                          fontSize: 15,
+                        ),
                       ),
                     ),
                   ),
