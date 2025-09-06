@@ -33,7 +33,30 @@ class FileCubit extends Cubit<FileState> {
         allowMultiple: false,
       );
       if (result != null && result.files.isNotEmpty) {
-        emit(state.copyWith(file: result.files.first, isUploaded: false));
+        final filePath = result.files.first.path;
+        if (filePath != null) {
+          final CroppedFile? croppedFile = await ImageCropper().cropImage(
+            sourcePath: filePath,
+            aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+            uiSettings: [
+              AndroidUiSettings(
+                toolbarTitle: 'Image Cropper',
+                toolbarColor: Colors.green,
+                toolbarWidgetColor: Colors.white,
+              ),
+              IOSUiSettings(title: 'Image Cropper'),
+            ],
+          );
+          if (croppedFile != null) {
+            final file = File(croppedFile.path);
+            final platformFile = PlatformFile(
+              name: croppedFile.path.split('/').last,
+              path: croppedFile.path,
+              size: await file.length(),
+            );
+            emit(state.copyWith(file: platformFile, isUploaded: false));
+          }
+        }
       }
     } catch (e) {
       logger.e(e);
