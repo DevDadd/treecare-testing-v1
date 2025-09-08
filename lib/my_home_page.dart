@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:testtree/feature/home/setting/views/chat_bot_page.dart';
 import 'package:testtree/feature/home/setting/views/chat_bot_page_provider.dart';
 import 'package:testtree/feature/home/setting/views/home_page.dart';
+import 'package:testtree/feature/home/setting/views/profile_page_provider.dart';
 import 'package:testtree/feature/home/setting/views/upload_page_provider.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -15,18 +16,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _bottomNavIndex = 1;
-
+  late int _bottomNavIndex;
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _bottomNavIndex = widget.index ?? 1;
+  }
   final iconList = <IconData>[
     FontAwesomeIcons.file,
     FontAwesomeIcons.house,
     FontAwesomeIcons.message,
+    FontAwesomeIcons.user,
   ];
 
   final List<Widget> pages = [
     const UploadPageProvider(),
     const HomePage(),
     const ChatBotPageProvider(),
+    const ProfilePageProvider(),
   ];
 
   @override
@@ -38,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.white,
         icons: iconList,
         activeIndex: _bottomNavIndex,
-        gapLocation: GapLocation.end,
+        gapLocation: GapLocation.none,
         notchSmoothness: NotchSmoothness.defaultEdge,
         onTap: (index) => setState(() => _bottomNavIndex = index),
         inactiveColor: Colors.grey,

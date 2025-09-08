@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
+import 'package:testtree/cubit/user_cubit.dart';
+import 'package:testtree/model/user.dart';
 import 'package:testtree/router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testtree/widget/social_button.dart';
@@ -140,6 +143,8 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
                         final GoogleSignInAccount? user = await googleSignIn
                             .signIn();
                         if (user != null) {
+                          final userusing = User(userName: user.displayName ?? " ", imageUrl: user.photoUrl ?? " ");
+                          context.read<UserCubit>().addUser(userusing);
                           if (mounted) {
                             context.push(AppRouteConstant.myHomePage);
                           }

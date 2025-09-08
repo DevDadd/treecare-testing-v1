@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
               title: "Identify Disease",
               subtitle: "Diagnose tree health issues",
               onTap: () {
-                context.push(AppRouteConstant.myHomePage);
+                context.push(AppRouteConstant.myHomePage,extra: 0);
               },
             ),
             _optionCard(
@@ -68,9 +68,10 @@ class HomePage extends StatelessWidget {
               bgColor: Colors.orange.shade50,
               title: "Care Tips",
               subtitle: "Expert advice & guidance",
-              onTap: () {},
+              onTap: () {
+                context.push(AppRouteConstant.myHomePage, extra: 2);
+              },
             ),
-
             _learnMoreCard(),
 
             const SizedBox(height: 24),
