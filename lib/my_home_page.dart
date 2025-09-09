@@ -17,12 +17,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late int _bottomNavIndex;
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _bottomNavIndex = widget.index ?? 1;
   }
+
   final iconList = <IconData>[
     FontAwesomeIcons.file,
     FontAwesomeIcons.house,
@@ -43,7 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: pages[_bottomNavIndex],
 
       bottomNavigationBar: AnimatedBottomNavigationBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? Color(0xFF121212)
+            : Colors.white,
         icons: iconList,
         activeIndex: _bottomNavIndex,
         gapLocation: GapLocation.none,

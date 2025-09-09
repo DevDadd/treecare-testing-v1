@@ -24,7 +24,7 @@ class ProfilePage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Theme.of(context).brightness == Brightness.dark
-          ? Colors.black
+          ? Color(0xFF1A1A1D)
           : const Color.fromARGB(255, 247, 245, 245),
       appBar: AppBar(),
       body: BlocBuilder<ThemeCubit, ThemeState>(
