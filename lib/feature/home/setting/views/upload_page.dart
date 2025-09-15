@@ -2,11 +2,13 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testtree/cubit/file_cubit.dart';
 import 'package:testtree/cubit/file_state.dart';
 import 'package:testtree/cubit/tree_cubit.dart';
 import 'package:testtree/cubit/tree_state.dart';
+import 'package:testtree/router/go_router.dart';
 
 class UploadPage extends StatefulWidget {
   const UploadPage({super.key});
@@ -284,7 +286,10 @@ class _UploadPageState extends State<UploadPage> {
                                   context.read<TreeCubit>().getTree(
                                     tree!.treeId!,
                                   );
-                                  context.read<TreeCubit>().addHistory(tree);
+                                  context.push(
+                                    AppRouteConstant.resultDetailPage,
+                                    extra: tree.treeId,
+                                  );
                                 }
                               }
                             : null,
@@ -303,40 +308,6 @@ class _UploadPageState extends State<UploadPage> {
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
-                        ),
-                      ),
-
-                    const SizedBox(height: 20),
-
-                    // Diagnosis Result
-                    if (treeState.treeResult != null)
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.green.shade50,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.green.shade200),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              treeState.treeResult!.species ?? "",
-                              style: GoogleFonts.cairo(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.green.shade800,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              treeState.treeResult!.disease ?? "",
-                              style: GoogleFonts.cairo(
-                                fontSize: 16,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ],
                         ),
                       ),
                   ],

@@ -8,6 +8,7 @@ import 'package:testtree/di.dart';
 import 'package:testtree/feature/home/setting/views/google_login_page.dart';
 import 'package:testtree/feature/home/setting/views/history_detail_page.dart';
 import 'package:testtree/feature/home/setting/views/history_page.dart';
+import 'package:testtree/feature/home/setting/views/result_detail_page.dart';
 import 'package:testtree/my_home_page.dart';
 
 class AppRouteConstant {
@@ -18,7 +19,7 @@ class AppRouteConstant {
   static const String myHomePage = '/my-home-page';
   static const String myHistoryPage = '/my-history-page';
   static const String historyDetailPage = '/history-detail-page';
-
+  static const String resultDetailPage = '/result-detail-page';
   // Nested Key
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
@@ -41,10 +42,7 @@ class AppRoutes {
         path: AppRouteConstant.initial,
         builder: (BuildContext context, GoRouterState state) {
           final UserCubit userCubit = getIt.get();
-          return BlocProvider.value(
-            value: userCubit,
-            child: GoogleLoginPage(),
-          );
+          return BlocProvider.value(value: userCubit, child: GoogleLoginPage());
         },
       ),
       GoRoute(
@@ -69,6 +67,18 @@ class AppRoutes {
             value: treeCubit,
             child: HistoryDetailPage(
               treeId: state.extra is int ? state.extra as int : 0,
+            ),
+          );
+        },
+      ),
+      GoRoute(
+        path: AppRouteConstant.resultDetailPage,
+        builder: (BuildContext context, GoRouterState state) {
+          final TreeCubit treeCubit = getIt.get();
+          return BlocProvider.value(
+            value: treeCubit,
+            child: ResultDetailPage(
+              id: state.extra is int ? state.extra as int : 0,
             ),
           );
         },
