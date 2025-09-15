@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
               title: "Identify Disease",
               subtitle: "Diagnose tree health issues",
               onTap: () {
-                context.push(AppRouteConstant.myHomePage,extra: 0);
+                context.push(AppRouteConstant.myHomePage, extra: 0);
               },
             ),
             _optionCard(

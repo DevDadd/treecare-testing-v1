@@ -54,7 +54,8 @@ class TreeCubit extends HydratedCubit<TreeState> {
   void addHistory(Tree tree) {
     emit(state.copyWith(treeHistory: [...state.treeHistory, tree]));
   }
-  void clearResult(){
+
+  void clearResult() {
     emit(state.copyWith(treeResult: null));
   }
 

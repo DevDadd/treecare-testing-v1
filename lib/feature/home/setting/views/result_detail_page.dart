@@ -206,7 +206,7 @@ class ResultDetailPage extends StatelessWidget {
                         context.push(AppRouteConstant.myHistoryPage);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 4, 163, 118),
+                        backgroundColor: const Color(0xFF00E1A0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
                             30,
