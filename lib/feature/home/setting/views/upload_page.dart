@@ -47,7 +47,9 @@ class _UploadPageState extends State<UploadPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF9F9F9),
+      backgroundColor: Theme.of(context).brightness == ThemeMode.dark
+          ? Colors.white
+          : const Color.fromARGB(255, 28, 28, 37),
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -87,7 +89,9 @@ class _UploadPageState extends State<UploadPage> {
                     Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == ThemeMode.dark
+                            ? Colors.white
+                            : const Color.fromARGB(255, 28, 28, 37),
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
                           color: Colors.green.shade300,
@@ -129,7 +133,10 @@ class _UploadPageState extends State<UploadPage> {
                             textAlign: TextAlign.center,
                             style: GoogleFonts.cairo(
                               fontSize: 14,
-                              color: Colors.black54,
+                              color:
+                                  Theme.of(context).brightness == ThemeMode.dark
+                                  ? Colors.black
+                                  : Colors.white,
                             ),
                           ),
                           const SizedBox(height: 20),
@@ -172,7 +179,11 @@ class _UploadPageState extends State<UploadPage> {
                                     "Tap to select from gallery or take a photo",
                                     style: GoogleFonts.cairo(
                                       fontSize: 13,
-                                      color: Colors.black54,
+                                      color:
+                                          Theme.of(context).brightness ==
+                                              ThemeMode.dark
+                                          ? Colors.black
+                                          : Colors.white,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -194,7 +205,10 @@ class _UploadPageState extends State<UploadPage> {
                             textAlign: TextAlign.center,
                             style: GoogleFonts.cairo(
                               fontSize: 14,
-                              color: Colors.black54,
+                              color:
+                                  Theme.of(context).brightness == ThemeMode.dark
+                                  ? Colors.black
+                                  : Colors.white,
                             ),
                           ),
                           SizedBox(height: 10),

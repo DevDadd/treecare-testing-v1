@@ -208,9 +208,7 @@ class ResultDetailPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF00E1A0),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            30,
-                          ), // round corners
+                          borderRadius: BorderRadius.circular(30), // round
                         ),
                         elevation: 0,
                       ),
