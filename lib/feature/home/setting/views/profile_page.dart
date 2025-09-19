@@ -221,7 +221,10 @@ Future<void> showLogoutDialog(
         actionsAlignment: MainAxisAlignment.center,
         actions: <Widget>[
           TextButton(
-            child: Text("Cancel", style: GoogleFonts.cairo()),
+            child: Text(
+              "Cancel",
+              style: GoogleFonts.cairo(color: Colors.green),
+            ),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -229,7 +232,10 @@ Future<void> showLogoutDialog(
           TextButton(
             child: Text(
               "Log out",
-              style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+              style: GoogleFonts.cairo(
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
             ),
             onPressed: () {
               Navigator.of(context).pop();

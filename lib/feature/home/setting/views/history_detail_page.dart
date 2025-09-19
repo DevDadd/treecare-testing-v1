@@ -24,7 +24,9 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? Color(0xFF1A1A1D)
+          : Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -69,7 +71,10 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
                           style: GoogleFonts.cairo(
                             fontWeight: FontWeight.w700,
                             fontSize: 28,
-                            color: Colors.black87,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.black87,
                           ),
                         ),
                         const SizedBox(height: 6),
@@ -78,7 +83,10 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
                           style: GoogleFonts.cairo(
                             fontWeight: FontWeight.w400,
                             fontSize: 18,
-                            color: Colors.black54,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.black87,
                           ),
                         ),
                         const SizedBox(height: 16),

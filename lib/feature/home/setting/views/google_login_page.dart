@@ -23,33 +23,6 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   final Logger logger = Logger();
 
-  final GoogleSignIn googleSignIn = GoogleSignIn();
-
-  @override
-  void initState() {
-    super.initState();
-
-    googleSignIn
-        .signInSilently()
-        .then((user) {
-          if (user != null && mounted) {
-            final userusing = User(
-              userName: user.displayName ?? " ",
-              imageUrl: user.photoUrl ?? " ",
-            );
-            context.read<UserCubit>().addUser(userusing);
-
-            // Navigate to home automatically
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              context.push(AppRouteConstant.myHomePage);
-            });
-          }
-        })
-        .catchError((e) {
-          logger.e("Silent sign-in failed: $e");
-        });
-  }
-
   @override
   void dispose() {
     _emailController.dispose();
@@ -70,7 +43,12 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
               const SizedBox(height: 40),
 
               /// Logo
-              Center(child: Image.asset('assets/background.png', height: 200)),
+              Center(
+                child: Image.asset(
+                  'assets/background.png', // thay bằng đường dẫn logo trong assets của bạn
+                  height: 200,
+                ),
+              ),
 
               const SizedBox(height: 30),
 
@@ -160,19 +138,23 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
                 children: [
                   GestureDetector(
                     onTap: () async {
+                      final GoogleSignIn googleSignIn = GoogleSignIn();
                       try {
-                        final user = await googleSignIn.signIn();
+                        final GoogleSignInAccount? user = await googleSignIn
+                            .signIn();
                         if (user != null) {
-                          final userusing = User(
-                            userName: user.displayName ?? " ",
-                            imageUrl: user.photoUrl ?? " ",
-                          );
-                          context.read<UserCubit>().addUser(userusing);
-                          if (mounted)
+                          if (mounted) {
+                            context.read<UserCubit>().addUser(
+                              User(
+                                userName: user.displayName ?? " ",
+                                imageUrl: user.photoUrl ?? " ",
+                              ),
+                            );
                             context.push(AppRouteConstant.myHomePage);
+                          }
                         }
                       } catch (e) {
-                        logger.e("Google sign-in error: $e");
+                        logger.e(e);
                       }
                     },
                     child: SocialButton(
@@ -217,6 +199,7 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
                   ),
                 ],
               ),
+
               const SizedBox(height: 30),
             ],
           ),

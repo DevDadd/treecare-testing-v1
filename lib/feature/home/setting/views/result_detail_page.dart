@@ -15,9 +15,9 @@ class ResultDetailPage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).brightness == ThemeMode.dark
-          ? Colors.white
-          : const Color.fromARGB(255, 28, 28, 37),
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? const Color.fromARGB(255, 28, 28, 37)
+          : Colors.white,
 
       body: BlocBuilder<TreeCubit, TreeState>(
         builder: (context, state) {
@@ -25,7 +25,6 @@ class ResultDetailPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Ảnh lớn trên cùng
                 Container(
                   height: size.height * 0.35,
                   width: double.infinity,
@@ -51,7 +50,9 @@ class ResultDetailPage extends StatelessWidget {
                     style: GoogleFonts.montserrat(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
-                      color: Colors.white,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
                     ),
                   ),
                 ),
@@ -66,7 +67,9 @@ class ResultDetailPage extends StatelessWidget {
                         "Diseases Detected:",
                         style: GoogleFonts.montserrat(
                           fontSize: 15,
-                          color: Colors.grey[300],
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Colors.black,
                         ),
                       ),
                     ),
@@ -77,7 +80,9 @@ class ResultDetailPage extends StatelessWidget {
                         style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.w700,
                           fontSize: 15,
-                          color: Colors.white,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Colors.black,
                         ),
                       ),
                     ),
@@ -91,7 +96,9 @@ class ResultDetailPage extends StatelessWidget {
                     height: size.height * 0.23,
                     width: size.width * 0.9,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 56, 59, 65),
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? const Color.fromARGB(255, 62, 67, 78)
+                          : const Color.fromARGB(255, 216, 219, 226),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     clipBehavior: Clip.antiAlias,
@@ -117,6 +124,11 @@ class ResultDetailPage extends StatelessWidget {
                                         text: "Your plant ",
                                         style: GoogleFonts.montserrat(
                                           fontWeight: FontWeight.bold,
+                                          color:
+                                              Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.white
+                                              : Colors.black,
                                         ),
                                       ),
                                       TextSpan(
@@ -134,7 +146,11 @@ class ResultDetailPage extends StatelessWidget {
                                   "Get a custom treatment plan to cure your plant.",
                                   style: GoogleFonts.montserrat(
                                     fontSize: 14,
-                                    color: Colors.grey[400],
+                                    color:
+                                        Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.grey[400]
+                                        : Colors.black,
                                   ),
                                 ),
                                 const SizedBox(height: 12),
@@ -146,7 +162,11 @@ class ResultDetailPage extends StatelessWidget {
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF00E1A0),
+                                    backgroundColor:
+                                        Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? const Color.fromARGB(255, 15, 99, 36)
+                                        : Colors.green,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50),
                                     ),
@@ -206,7 +226,10 @@ class ResultDetailPage extends StatelessWidget {
                         context.push(AppRouteConstant.myHistoryPage);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00E1A0),
+                        backgroundColor:
+                            Theme.of(context).brightness == Brightness.dark
+                            ? const Color.fromARGB(255, 15, 99, 36)
+                            : Colors.green,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30), // round
                         ),

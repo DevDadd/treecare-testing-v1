@@ -18,7 +18,9 @@ class ChatBotPage extends StatelessWidget {
           title: Text(
             "AI Personal Assistant",
             style: GoogleFonts.cairo(
-              color: Colors.green,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.green,
               fontWeight: FontWeight.w600,
             ),
           ),

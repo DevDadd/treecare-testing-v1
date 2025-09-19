@@ -47,9 +47,7 @@ class _UploadPageState extends State<UploadPage> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: isDark
-            ? const Color.fromARGB(255, 28, 28, 37)
-            : Colors.white,
+        backgroundColor: isDark ? Color(0xFF1A1A1D) : Colors.white,
         appBar: AppBar(
           flexibleSpace: Container(
             decoration: const BoxDecoration(
@@ -91,9 +89,7 @@ class _UploadPageState extends State<UploadPage> {
                         Container(
                           padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
-                            color: isDark
-                                ? const Color.fromARGB(255, 28, 28, 37)
-                                : Colors.white,
+                            color: isDark ? Color(0xFF1A1A1D) : Colors.white,
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
                               color: Colors.green.shade300,
