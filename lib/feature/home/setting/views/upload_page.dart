@@ -22,7 +22,9 @@ class _UploadPageState extends State<UploadPage> {
     if (bytes <= 0) return "0 B";
     const suffixes = ["B", "KB", "MB", "GB", "TB"];
     var i = (log(bytes) / log(1024)).floor();
-    return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) + ' ' + suffixes[i];
+    return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) +
+        ' ' +
+        suffixes[i];
   }
 
   late TreeCubit treeCubit;
@@ -73,13 +75,14 @@ class _UploadPageState extends State<UploadPage> {
             ),
           ],
         ),
-        body: SafeArea( // ✅ FIX: tránh ăn vào AppBar/status bar
+        body: SafeArea(
+          // ✅ FIX: tránh ăn vào AppBar/status bar
           child: BlocBuilder<TreeCubit, TreeState>(
             builder: (context, treeState) {
               return BlocBuilder<FileCubit, FileState>(
                 builder: (context, fileState) {
                   final pickedFile = fileState.file;
-      
+
                   return SingleChildScrollView(
                     padding: const EdgeInsets.all(16),
                     child: Column(
@@ -137,7 +140,7 @@ class _UploadPageState extends State<UploadPage> {
                                 ),
                               ),
                               const SizedBox(height: 20),
-      
+
                               // Button chọn file
                               GestureDetector(
                                 onTap: () {
@@ -176,7 +179,9 @@ class _UploadPageState extends State<UploadPage> {
                                         "Tap to select from gallery or take a photo",
                                         style: GoogleFonts.cairo(
                                           fontSize: 13,
-                                          color: isDark ? Colors.white : Colors.black,
+                                          color: isDark
+                                              ? Colors.white
+                                              : Colors.black,
                                         ),
                                         textAlign: TextAlign.center,
                                       ),
@@ -221,17 +226,22 @@ class _UploadPageState extends State<UploadPage> {
                             ],
                           ),
                         ),
-      
+
                         const SizedBox(height: 20),
-      
+
                         // Show selected file info
                         if (pickedFile != null)
                           Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: isDark
+                                  ? const Color.fromARGB(255, 28, 28, 37)
+                                  : Colors.white,
                               borderRadius: BorderRadius.circular(12),
-                              border: Border.all(color: Colors.green, width: 1.5),
+                              border: Border.all(
+                                color: Colors.green,
+                                width: 1.5,
+                              ),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.15),
@@ -250,14 +260,17 @@ class _UploadPageState extends State<UploadPage> {
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         pickedFile.name,
                                         style: GoogleFonts.cairo(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
-                                          color: isDark ? Colors.white : Colors.black,
+                                          color: isDark
+                                              ? Colors.white
+                                              : Colors.black,
                                         ),
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -266,7 +279,14 @@ class _UploadPageState extends State<UploadPage> {
                                         formatBytes(pickedFile.size, 2),
                                         style: GoogleFonts.cairo(
                                           fontSize: 12,
-                                          color: Colors.black54,
+                                          color: isDark
+                                              ? Colors.white
+                                              : const Color.fromARGB(
+                                                  255,
+                                                  28,
+                                                  28,
+                                                  37,
+                                                ),
                                         ),
                                       ),
                                     ],
@@ -275,19 +295,23 @@ class _UploadPageState extends State<UploadPage> {
                               ],
                             ),
                           ),
-      
+
                         const SizedBox(height: 20),
-      
+
                         if (pickedFile != null)
                           ElevatedButton(
                             onPressed: pickedFile != null
                                 ? () async {
-                                    final tree = await context.read<TreeCubit>().uploadTreeImage(
-                                      File(pickedFile.path ?? " "),
-                                    );
-      
+                                    final tree = await context
+                                        .read<TreeCubit>()
+                                        .uploadTreeImage(
+                                          File(pickedFile.path ?? " "),
+                                        );
+
                                     if (tree?.treeId != null) {
-                                      context.read<TreeCubit>().getTree(tree!.treeId!);
+                                      context.read<TreeCubit>().getTree(
+                                        tree!.treeId!,
+                                      );
                                       context.push(
                                         AppRouteConstant.resultDetailPage,
                                         extra: tree.treeId,

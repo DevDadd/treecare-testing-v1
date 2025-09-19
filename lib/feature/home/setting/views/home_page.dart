@@ -8,27 +8,28 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: isDark ? const Color(0xFF121212) : Colors.white,
         centerTitle: true,
         title: SizedBox(
           height: 100,
           child: Image.asset('assets/background.png', fit: BoxFit.cover),
         ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: isDark ? const Color(0xFF1A1A1D) : Colors.white,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: _searchBarContainer(context),
+              child: _searchBarContainer(context, isDark),
             ),
             const SizedBox(height: 20),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
@@ -36,13 +37,14 @@ class HomePage extends StatelessWidget {
                 style: GoogleFonts.cairo(
                   fontSize: 21,
                   fontWeight: FontWeight.w700,
-                  color: Colors.black87,
+                  color: isDark ? Colors.white : const Color(0xFF121212),
                 ),
               ),
             ),
             const SizedBox(height: 12),
-
             _optionCard(
+              context: context,
+              isDark: isDark,
               icon: Icons.health_and_safety,
               iconColor: Colors.red,
               bgColor: Colors.red.shade50,
@@ -53,6 +55,8 @@ class HomePage extends StatelessWidget {
               },
             ),
             _optionCard(
+              context: context,
+              isDark: isDark,
               icon: Icons.nature,
               iconColor: Colors.green,
               bgColor: Colors.green.shade50,
@@ -63,6 +67,8 @@ class HomePage extends StatelessWidget {
               },
             ),
             _optionCard(
+              context: context,
+              isDark: isDark,
               icon: Icons.lightbulb_outline,
               iconColor: Colors.orange,
               bgColor: Colors.orange.shade50,
@@ -72,8 +78,7 @@ class HomePage extends StatelessWidget {
                 context.push(AppRouteConstant.myHomePage, extra: 2);
               },
             ),
-            _learnMoreCard(),
-
+            _learnMoreCard(isDark),
             const SizedBox(height: 24),
           ],
         ),
@@ -82,26 +87,38 @@ class HomePage extends StatelessWidget {
   }
 }
 
-Widget _searchBarContainer(BuildContext context) {
+Widget _searchBarContainer(BuildContext context, bool isDark) {
   return Container(
     height: 48,
     width: double.infinity,
     padding: const EdgeInsets.symmetric(horizontal: 12),
     decoration: BoxDecoration(
-      color: const Color(0xFFF9FAFB),
+      color: isDark ? const Color(0xFF2A2A2A) : const Color(0xFFF9FAFB),
       borderRadius: BorderRadius.circular(24),
-      border: Border.all(color: Colors.grey.shade300),
+      border: Border.all(
+        color: isDark ? Colors.grey.shade700 : Colors.grey.shade300,
+      ),
     ),
     child: Row(
       children: [
-        const Icon(Icons.search, color: Colors.grey, size: 20),
+        Icon(
+          Icons.search,
+          color: isDark ? Colors.white54 : Colors.grey,
+          size: 20,
+        ),
         const SizedBox(width: 8),
-        const Expanded(
+        Expanded(
           child: TextField(
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(
+              fontSize: 14,
+              color: isDark ? Colors.white : Colors.black87,
+            ),
             decoration: InputDecoration(
               hintText: "Search tree or disease...",
-              hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
+              hintStyle: TextStyle(
+                color: isDark ? Colors.white54 : Colors.grey,
+                fontSize: 16,
+              ),
               border: InputBorder.none,
               isCollapsed: true,
               contentPadding: EdgeInsets.zero,
@@ -114,6 +131,8 @@ Widget _searchBarContainer(BuildContext context) {
 }
 
 Widget _optionCard({
+  required BuildContext context,
+  required bool isDark,
   required IconData icon,
   required Color iconColor,
   required Color bgColor,
@@ -129,9 +148,11 @@ Widget _optionCard({
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: isDark ? const Color(0xFF121212) : Colors.white,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.grey.shade200),
+          border: Border.all(
+            color: isDark ? const Color(0xFF5E5E5E) : Colors.grey.shade200,
+          ),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.08),
@@ -160,7 +181,7 @@ Widget _optionCard({
                     style: GoogleFonts.cairo(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                      color: isDark ? Colors.white : Colors.black87,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -168,7 +189,7 @@ Widget _optionCard({
                     subtitle,
                     style: GoogleFonts.cairo(
                       fontSize: 13,
-                      color: Colors.black54,
+                      color: isDark ? Colors.white70 : Colors.black54,
                     ),
                   ),
                 ],
@@ -181,20 +202,21 @@ Widget _optionCard({
   );
 }
 
-Widget _learnMoreCard() {
+Widget _learnMoreCard(bool isDark) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
     child: Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.green.shade50,
+        color: isDark ? const Color(0xFF121212) : Colors.green.shade50,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.green.shade100),
+        border: Border.all(
+          color: isDark ? const Color(0xFF5E5E5E) : Colors.green.shade100,
+        ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Text + button (left)
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -204,18 +226,23 @@ Widget _learnMoreCard() {
                   style: GoogleFonts.cairo(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
-                    color: Colors.black87,
+                    color: isDark ? Colors.white : Colors.black87,
                   ),
                 ),
                 const SizedBox(height: 6),
                 Text(
                   "Get personalized care recommendations for your trees",
-                  style: GoogleFonts.cairo(fontSize: 13, color: Colors.black54),
+                  style: GoogleFonts.cairo(
+                    fontSize: 13,
+                    color: isDark ? Colors.white70 : Colors.black54,
+                  ),
                 ),
                 const SizedBox(height: 12),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF22C55E), // green
+                    backgroundColor: isDark
+                        ? Colors.green.shade700
+                        : const Color(0xFF22C55E),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -239,7 +266,11 @@ Widget _learnMoreCard() {
             ),
           ),
           const SizedBox(width: 12),
-          const Icon(Icons.park, size: 50, color: Color(0xFF22C55E)),
+          Icon(
+            Icons.park,
+            size: 50,
+            color: isDark ? Colors.white70 : const Color(0xFF22C55E),
+          ),
         ],
       ),
     ),
